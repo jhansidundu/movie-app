@@ -3,3 +3,12 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.box  {
+
+  display: grid;
+  /* flex-direction: row; */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 30px 20px;
+  
+}

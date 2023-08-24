@@ -1,0 +1,10 @@
+.card {
+    background-color: rgb(73, 72, 72);
+    border-radius: 25px;
+    
+}
+
+.img {
+  width: 100%;
+  text-align: center;
+}

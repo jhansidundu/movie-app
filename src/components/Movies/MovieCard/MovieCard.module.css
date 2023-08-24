@@ -1,0 +1,14 @@
+.box  {
+
+    display: grid;
+    flex-direction: row;
+
+    
+}
+
+
+.img {
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+  }

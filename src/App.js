@@ -4,6 +4,7 @@ function App() {
   return (
     <>
       <Header />
+      <h2>Popular</h2>
       <Popular />
     </>
   );
