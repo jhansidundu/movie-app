@@ -12,6 +12,12 @@
    
   }
 
+  .heart {
+    position: absolute;
+   cursor: pointer;
+    margin-left: 16rem;
+  }
+
 .pic {
     width: 100%;
     height: 100%;
@@ -22,4 +28,11 @@
 
   .like {
     
+  }
+  .white-color {
+    color:white;
+  }
+
+  .red-color {
+    color: red;
   }

@@ -27,9 +27,7 @@ const Popular = () => {
   return (
     <ul className={classes.box}>
       {data.map((element) => (
-        <li>
-          <MovieCard element={element} id={element.id} />
-        </li>
+        <MovieCard element={element} id={element.id} />
       ))}
     </ul>
   );

@@ -32,13 +32,16 @@ const SearchMovies = (props) => {
   });
 
   return (
-    <ul className={classes.box}>
-      {searchResult.map((element) => (
-        <li>
-          <MovieCard element={element} />
-        </li>
-      ))}
-    </ul>
+    <>
+      <div>Searched Movies</div>
+      <ul className={classes.box}>
+        {searchResult.map((element) => (
+          <li>
+            <MovieCard element={element} />
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 export default SearchMovies;

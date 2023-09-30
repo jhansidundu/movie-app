@@ -4,7 +4,7 @@ import { getDocs, collection, addDoc } from "firebase/firestore";
 import { db } from "../configure/firebase";
 import { useEffect } from "react";
 import axios from "axios";
-import userContext from "../../Store/contex";
+import userContext from "../../Store/context";
 import { useContext } from "react";
 import classes from "./LikedItems.module.css";
 import MovieCard from "../Movies/MovieCard/MovieCard";
@@ -27,6 +27,9 @@ function LikedItems() {
 
   useEffect(() => {
     let filterData = [];
+    setLiked(() => {
+      return [];
+    });
     const getList = async () => {
       try {
         const data = await getDocs(movieCollection);
@@ -64,6 +67,7 @@ function LikedItems() {
         }
       }
     };
+
     getList();
   }, []);
 

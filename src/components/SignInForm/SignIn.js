@@ -1,26 +1,47 @@
-import React from "react";
-import { auth } from "./../configure/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../configure/firebase";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import userContext from "../../Store/context";
 
-// import { Redirect } from "react-router-dom";
 function SignIn() {
-  const history = useNavigate();
-  const onSubmitHandler = (e) => {
+  const context = useContext(userContext);
+  // localStorage.removeItem("userId");
+  let uid;
+  let history = useNavigate();
+  const onSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
-    console.log(email);
     const password = e.target.password.value;
-    createUserWithEmailAndPassword(auth, email, password).then((data) => {
-      console.log(data);
-      history("/");
-    });
+    const userID = localStorage.getItem("userId");
+    console.log(userID);
+    if (userID) {
+      context.setUId(userID);
+      context.setLogin(true);
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCred) => {
+          const user = userCred.user;
+          uid = user.uid;
+          // console.log(userCred);
+          context.setUId(uid);
+          context.setLogin(true);
+          localStorage.setItem("userId", uid);
+
+          history("/");
+        })
+        .catch((err) => {
+          // alert(err.code);
+          console.log(err);
+        });
+    }
   };
+
   return (
     <div>
-      <form onSubmit={onSubmitHandler}>
+      <form onSubmit={onSubmit}>
         <input name="email" placeholder="Email..." />
-        <input name="password" type="password" placeholder="Password" />
+        <input name="password" placeholder="Password..." />
         <button>SignIn</button>
       </form>
     </div>

@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import SignIn from "./components/SignInForm/SignIn";
 import Header from "./components/Header/Header";
 import SignUp from "./components/SignInForm/SignUp";
-import { UserContextProvider } from "./Store/contex";
+import { UserContextProvider } from "./Store/context";
 import LikedItems from "./components/FIreBaseStore/LikedItems";
 function App() {
   const [searchData, setSearchData] = useState();
@@ -24,6 +24,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/likedlist" element={<LikedItems />} />
+            <Route path="/home" element={<Home query={searchData} />} />
           </Routes>
         </BrowserRouter>
       </UserContextProvider>

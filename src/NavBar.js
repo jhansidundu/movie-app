@@ -5,7 +5,7 @@ import SignIn from "./components/SignInForm/SignIn";
 const NavBar = () => {
   return (
     <div>
-      <Link to="/">Home </Link>
+      {/* <Link to="/">Home </Link> */}
       {/* <Link to="/signin">signin</Link> */}
     </div>
   );

@@ -13,10 +13,10 @@ const Home = (props) => {
   return (
     <>
       {/* <Header search={onSetSearchData} /> */}
-      <h2>Searched Movies</h2>
+      {/* <h2>Searched Movies</h2> */}
       {search}
 
-      <h2>Popular</h2>
+      <h2>Popular Movies</h2>
       <Popular />
     </>
   );

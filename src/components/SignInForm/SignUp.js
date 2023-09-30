@@ -1,36 +1,29 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useContext } from "react";
 import { auth } from "../configure/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router";
-import { useContext } from "react";
-import userContext from "../../Store/contex";
+import userContext from "../../Store/context";
 
+// import { Redirect } from "react-router-dom";
 function SignUp() {
-  const context = useContext(userContext);
-  let uid;
-  let history = useNavigate();
-  const onSubmit = (e) => {
+  const contex = useContext(userContext);
+  const history = useNavigate();
+  const onSubmitHandler = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
+    console.log(email);
     const password = e.target.password.value;
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCred) => {
-        const user = userCred.user;
-        uid = user.uid;
-        // console.log(userCred);
-        context.setUId(uid);
-        history("/");
-      })
-      .catch((err) => {
-        // alert(err.code);
-        console.log(err);
-      });
+    createUserWithEmailAndPassword(auth, email, password).then((data) => {
+      console.log(data);
+      contex.setLogin(true);
+      history("/");
+    });
   };
-
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmitHandler}>
         <input name="email" placeholder="Email..." />
-        <input name="password" placeholder="Password..." />
+        <input name="password" type="password" placeholder="Password" />
         <button>SignUp</button>
       </form>
     </div>
