@@ -44,10 +44,9 @@ const MovieCard = (props) => {
         onMouseLeave={() => setHover(false)}
       >
         <img className={classes.pic} src={url} />
-
         {isHovered && likeButton}
-        <div style={{ color: "white" }}>{props.element.title}</div>
       </div>
+      <div className={classes["card-body"]}>{props.element.title}</div>
     </Card>
   );
 };
