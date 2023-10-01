@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../configure/firebase";
+import { auth } from "../../config/firebase";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
 import userContext from "../../Store/context";

@@ -1,12 +1,12 @@
-import { useCallback, useState } from "react";
-import Home from "./components/Home";
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./NavBar";
-import SignIn from "./components/SignInForm/SignIn";
-import Header from "./components/Header/Header";
-import SignUp from "./components/SignInForm/SignUp";
 import { UserContextProvider } from "./Store/context";
 import LikedItems from "./components/FIreBaseStore/LikedItems";
+import Header from "./components/Header/Header";
+import Home from "./components/Home";
+import SignIn from "./components/SignInForm/SignIn";
+import SignUp from "./components/SignInForm/SignUp";
 function App() {
   const [searchData, setSearchData] = useState();
   const onSetSearchData = (data) => {

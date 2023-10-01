@@ -1,38 +1,27 @@
-
-
 .image {
-    /* width: 100%; */
-    text-align: center;
-    /* width: 0;
-  height: 0; */
+  text-align: center;
   min-height: 100%;
   min-width: 100%;
   object-fit: cover;
+}
 
-   
-  }
-
-  .heart {
-    position: absolute;
-   cursor: pointer;
-    margin-left: 16rem;
-  }
+.heart {
+  position: absolute;
+  cursor: pointer;
+  margin-left: 16rem;
+}
 
 .pic {
-    width: 100%;
-    height: 100%;
-    border-top-right-radius: 25px;
-    border-top-left-radius: 25px;
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+}
 
-  }
+.white-color {
+  color: white;
+}
 
-  .like {
-    
-  }
-  .white-color {
-    color:white;
-  }
-
-  .red-color {
-    color: red;
-  }
+.red-color {
+  color: red;
+}

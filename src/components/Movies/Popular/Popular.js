@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import classes from "./Popular.module.css";
 import axios from "axios";
-import { AUTHTOKEN } from "../../constants";
-import MovieCard from "../Movies/MovieCard/MovieCard";
+import { AUTHTOKEN } from "../../../constants";
+import MovieCard from "../MovieCard/MovieCard";
 const Popular = () => {
   const [data, setData] = useState([]);
   let result = [];
@@ -25,11 +25,14 @@ const Popular = () => {
   }, []);
 
   return (
-    <ul className={classes.box}>
-      {data.map((element) => (
-        <MovieCard element={element} id={element.id} />
-      ))}
-    </ul>
+    <>
+      <h2 className={classes.title}>Popular Movies</h2>
+      <ul className={classes.box}>
+        {data.map((element) => (
+          <MovieCard key={element.id} element={element} id={element.id} />
+        ))}
+      </ul>
+    </>
   );
 };
 

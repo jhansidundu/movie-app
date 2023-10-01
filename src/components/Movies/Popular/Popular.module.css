@@ -1,0 +1,16 @@
+.popular {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.box {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 30px 20px;
+  padding: 0 1rem;
+}
+
+.title {
+  padding-left: 1rem;
+}
