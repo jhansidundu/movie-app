@@ -18,7 +18,6 @@ const MovieCard = (props) => {
     : image;
   const movieCollection = collection(db, "wishlist-movies");
   const onAddLike = async () => {
-    console.log(context.uid, props.element.id);
     if (color === "white-color") {
       await addDoc(movieCollection, {
         movieId: props.element.id,

@@ -20,7 +20,6 @@ const Popular = () => {
       res = res.data;
       result = res["results"];
       setData(result);
-      // console.log(data);
     });
   }, []);
 

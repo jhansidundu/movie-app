@@ -1,10 +1,11 @@
 import { useContext, useRef } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import userContext from "../../Store/context";
 import image from "../../assets/Tmdb.svg";
 import classes from "./Header.module.css";
-import { Link } from "react-router-dom";
-const Header = (props) => {
+import { BiSearchAlt } from "react-icons/bi";
+const Header = () => {
   const searchRef = useRef(null);
   const navigate = useNavigate();
   const context = useContext(userContext);
@@ -18,9 +19,6 @@ const Header = (props) => {
   const onGetLike = () => {
     navigate("/likedlist");
   };
-  const onHome = () => {
-    navigate("/home");
-  };
   const onSignOut = () => {
     context.setLogin(false);
     localStorage.removeItem("userId");
@@ -30,7 +28,7 @@ const Header = (props) => {
   return (
     <>
       <header className={classes.header}>
-        <Link className={classes.logo} onClick={onHome}>
+        <Link className={classes.logo} to="/home">
           <img src={image} />
         </Link>
 
@@ -41,7 +39,9 @@ const Header = (props) => {
             className={classes.input}
             placeholder="Search..."
           />
-          <button type="submit" className={classes.button}></button>
+          <button type="submit" className={classes.button}>
+            <BiSearchAlt />
+          </button>
         </div>
 
         <div className={classes.InOut}>

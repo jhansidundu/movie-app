@@ -19,7 +19,7 @@ export const UserContextProvider = (props) => {
   }, []);
 
   return (
-    <userContext.Provider value={{ uid: uId, login: login, setUId, setLogin }}>
+    <userContext.Provider value={{ uid: uId, login, setUId, setLogin }}>
       {props.children}
     </userContext.Provider>
   );

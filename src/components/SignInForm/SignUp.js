@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router";
 import userContext from "../../Store/context";
+import { auth } from "../../config/firebase";
 
 function SignUp() {
   const contex = useContext(userContext);
