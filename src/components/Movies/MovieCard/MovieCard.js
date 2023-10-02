@@ -2,7 +2,7 @@ import classes from "./MovieCard.module.css";
 import Card from "../../UI/Card/Card";
 import image from "../../../assets/No_Image_Available.jpg";
 import { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import userContext from "../../../Store/context";
 import { useContext } from "react";
@@ -19,12 +19,21 @@ const MovieCard = (props) => {
   const movieCollection = collection(db, "wishlist-movies");
   const onAddLike = async () => {
     console.log(context.uid, props.element.id);
-    await addDoc(movieCollection, {
-      movieId: props.element.id,
-      uid: context.uid,
-    });
-    setColor("red-color");
+    if (color === "white-color") {
+      await addDoc(movieCollection, {
+        movieId: props.element.id,
+        uid: context.uid,
+      });
+      setColor("red-color");
+    } else {
+      await deleteDoc(movieCollection, {
+        movieId: props.element.id,
+        uid: context.uid,
+      });
+      setColor("white-color");
+    }
   };
+
   let likeButton;
   if (context.login) {
     likeButton = (

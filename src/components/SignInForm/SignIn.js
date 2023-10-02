@@ -24,10 +24,10 @@ function SignIn() {
           const user = userCred.user;
           uid = user.uid;
           // console.log(userCred);
-          context.setUId(uid);
-          context.setLogin(true);
           localStorage.setItem("userId", uid);
 
+          context.setUId(uid);
+          context.setLogin(true);
           history("/");
         })
         .catch((err) => {
