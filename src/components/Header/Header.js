@@ -10,6 +10,14 @@ const Header = () => {
   const navigate = useNavigate();
   const context = useContext(userContext);
 
+  function handleSearch() {
+    const searchQuery = searchRef.current.value;
+    console.log(typeof searchQuery);
+    console.log(searchQuery);
+    if (!searchQuery || !searchQuery.trim()) return;
+    navigate(`/search?q=${searchQuery}`);
+  }
+
   const OnLogin = () => {
     navigate("/signin");
   };
@@ -22,7 +30,6 @@ const Header = () => {
   const onSignOut = () => {
     context.setLogin(false);
     localStorage.removeItem("userId");
-
     navigate("/");
   };
   return (
@@ -39,7 +46,7 @@ const Header = () => {
             className={classes.input}
             placeholder="Search..."
           />
-          <button type="submit" className={classes.button}>
+          <button onClick={handleSearch} className={classes.button}>
             <BiSearchAlt />
           </button>
         </div>
@@ -49,14 +56,14 @@ const Header = () => {
             ""
           ) : (
             <span className={classes.headerLink} onClick={OnLogin}>
-              LogIn
+              Login
             </span>
           )}
           {context.login ? (
             ""
           ) : (
             <span className={classes.headerLink} onClick={onSignUp}>
-              SignUp
+              Signup
             </span>
           )}
           {context.login ? (

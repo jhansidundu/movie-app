@@ -1,6 +1,19 @@
-.login-card {
+.form {
   width: 50%;
   margin: 2rem auto;
   padding: 1rem 2rem;
-  background: rgb(16 182 222 / 30%);
+  background-color: rgb(12 29 42);
+}
+
+.login {
+  color: white;
+  padding-top: 3rem;
+  background-color: rgb(35, 35, 35);
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  border-radius: none !important;
+}
+
+.error {
+  color: red;
 }

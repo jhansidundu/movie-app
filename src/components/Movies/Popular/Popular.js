@@ -24,14 +24,14 @@ const Popular = () => {
   }, []);
 
   return (
-    <>
-      <h2 className={classes.title}>Popular Movies</h2>
+    <div className={classes.content}>
+      <h4 className={classes.title}>Popular Movies</h4>
       <ul className={classes.box}>
         {data.map((element) => (
           <MovieCard key={element.id} element={element} id={element.id} />
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

@@ -1,8 +1,22 @@
+.box {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 30px 20px;
+  padding-right: 1rem;
+}
 
-.box  {
+.px-2 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
 
-    display: grid;
-   
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 30px 20px;
+.pt-1 {
+  padding-top: 1rem;
+}
+
+.content {
+  color: white;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  background-color: rgb(35, 35, 35);
 }

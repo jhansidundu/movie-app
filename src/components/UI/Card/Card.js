@@ -1,7 +1,8 @@
 import classes from "./Card.module.css";
 const Card = (props) => {
+  const customClass = props.class ? props.class : "";
   return (
-    <div className={`${classes.card}  ${props.class}`}>{props.children}</div>
+    <div className={`${classes.card}  ${customClass}`}>{props.children}</div>
   );
 };
 

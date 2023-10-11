@@ -46,7 +46,7 @@ function LikedItems() {
 
   return (
     <>
-      <h2 className={classes.heading}>Your Whishlist</h2>
+      <h4 className={classes.heading}>Your Whishlist</h4>
       <div className={classes.box}>
         {likeData.map((element) => (
           <MovieCard key={element.id} element={element} />

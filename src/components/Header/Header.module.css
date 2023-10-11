@@ -33,7 +33,6 @@
   background: transparent;
   margin: 0;
   padding: 7px 8px;
-  font-size: 14px;
   color: white;
   min-width: 400px;
   border: 1px solid rgb(7 65 112);
@@ -52,7 +51,7 @@
   margin: auto;
 }
 
-.button[type="submit"] {
+.button {
   cursor: pointer;
   opacity: 0.8;
   border: 1px solid rgb(7 65 112);
@@ -61,7 +60,7 @@
   padding: 0 0.5rem;
 }
 
-.button[type="submit"]:hover {
+.button:hover {
   opacity: 1;
 }
 

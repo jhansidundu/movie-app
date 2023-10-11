@@ -1,9 +1,8 @@
 import Popular from "./Movies/Popular/Popular";
 import SearchMovies from "./Movies/SerchedMovies/SearchMovies";
-const Home = ({ query }) => {
+const Home = () => {
   return (
     <>
-      {query && <SearchMovies query={query} />}
       <Popular />
     </>
   );

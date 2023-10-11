@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import userContext from "../../Store/context";
 import { auth } from "../../config/firebase";
@@ -8,56 +8,53 @@ import classes from "./SignIn.module.css";
 
 function SignIn() {
   const context = useContext(userContext);
+  const [errorMessage, setErrorMessage] = useState(null);
   let uid;
   let history = useNavigate();
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(null);
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const userID = localStorage.getItem("userId");
-    console.log(userID);
-    if (userID) {
-      context.setUId(userID);
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      const user = response.user;
+      localStorage.setItem("userId", user.uid);
+      context.setUId(user.uid);
       context.setLogin(true);
-    } else {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCred) => {
-          const user = userCred.user;
-          uid = user.uid;
-          localStorage.setItem("userId", uid);
-
-          context.setUId(uid);
-          context.setLogin(true);
-          history("/");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      history("/");
+    } catch (err) {
+      setErrorMessage("Invalid Username/Password");
     }
   };
 
   return (
-    <Card class={classes["login-card"]}>
-      <h2>Login</h2>
-      <form onSubmit={onSubmit}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Username
-          </label>
-          <input type="email" className="form-control" id="email" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input type="password" className="form-control" id="password" />
-        </div>
+    <div class={classes["login"]}>
+      <div className={classes.form}>
+        <h2 className="mb-4">Login</h2>
+        <form onSubmit={onSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Username
+            </label>
+            <input type="email" className="form-control" id="email" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input type="password" className="form-control" id="password" />
+          </div>
+          {errorMessage && (
+            <div className={`${classes.error} mb-2`}>{errorMessage}</div>
+          )}
 
-        <button type="submit" className="btn btn-info">
-          LOGIN
-        </button>
-      </form>
-    </Card>
+          <button type="submit" className="btn btn-info">
+            LOGIN
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
 

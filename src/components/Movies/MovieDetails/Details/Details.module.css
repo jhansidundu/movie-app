@@ -1,0 +1,55 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rating {
+  font-size: 2rem;
+  display: flex;
+  padding: 0 4rem;
+  align-items: center;
+}
+
+.rating span {
+  padding-right: 1rem;
+}
+.details {
+  color: #d9d9d9;
+  padding-top: 3rem;
+}
+.tagline {
+  color: #bfbfbf;
+}
+.synopsis {
+  margin-top: 1.5rem;
+}
+
+.key-info {
+  margin-top: 1.5rem;
+}
+
+.overview {
+  margin-top: 0.5rem;
+  color: #bfbfbf;
+}
+
+.border-right {
+  border-right: 1px solid grey;
+}
+
+.px-1 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.pl-1 {
+  padding-left: 0.75rem;
+}
+
+.pr-1 {
+  padding-right: 0.75rem;
+}
+
+.color-grey {
+  color: grey;
+}

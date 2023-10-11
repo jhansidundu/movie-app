@@ -7,16 +7,21 @@ import { db } from "../../../config/firebase";
 import userContext from "../../../Store/context";
 import { useContext } from "react";
 import { BiHeart } from "react-icons/bi";
+import { useNavigate } from "react-router";
 
 const MovieCard = (props) => {
   const context = useContext(userContext);
   const [isHovered, setHover] = useState(false);
   const [color, setColor] = useState("white-color");
+  const navigate = useNavigate();
 
   const url = props.element.backdrop_path
     ? `https://image.tmdb.org/t/p/w220_and_h330_face${props.element.backdrop_path}`
     : image;
   const movieCollection = collection(db, "wishlist-movies");
+  const goToMovieDetails = () => {
+    navigate(`/movie/${props.element.id}`);
+  };
   const onAddLike = async () => {
     if (color === "white-color") {
       await addDoc(movieCollection, {
@@ -46,15 +51,17 @@ const MovieCard = (props) => {
 
   return (
     <Card class={classes["card-bg"]}>
-      <div
-        className={classes.image}
-        onMouseOver={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
-        <img className={classes.pic} src={url} />
-        {isHovered && likeButton}
+      <div onClick={goToMovieDetails}>
+        <div
+          className={classes.image}
+          onMouseOver={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          <img className={classes.pic} src={url} />
+          {isHovered && likeButton}
+        </div>
+        <div className={classes["card-body"]}>{props.element.title}</div>
       </div>
-      <div className={classes["card-body"]}>{props.element.title}</div>
     </Card>
   );
 };
