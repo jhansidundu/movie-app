@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.card-bg {
+  background-color: rgb(73, 72, 72);
+}
+
 .heart {
   position: absolute;
   cursor: pointer;

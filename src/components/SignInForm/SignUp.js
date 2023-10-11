@@ -3,6 +3,8 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router";
 import userContext from "../../Store/context";
 import { auth } from "../../config/firebase";
+import Card from "../UI/Card/Card";
+import classes from "./SignIn.module.css";
 
 function SignUp() {
   const contex = useContext(userContext);
@@ -19,13 +21,27 @@ function SignUp() {
     });
   };
   return (
-    <div>
+    <Card class={classes["login-card"]}>
+      <h2>SignUp</h2>
       <form onSubmit={onSubmitHandler}>
-        <input name="email" placeholder="Email..." />
-        <input name="password" type="password" placeholder="Password" />
-        <button>SignUp</button>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Username
+          </label>
+          <input type="email" className="form-control" id="email" />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input type="password" className="form-control" id="password" />
+        </div>
+
+        <button type="submit" className="btn btn-info">
+          SIGNUP
+        </button>
       </form>
-    </div>
+    </Card>
   );
 }
 

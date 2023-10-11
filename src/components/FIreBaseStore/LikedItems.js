@@ -45,11 +45,14 @@ function LikedItems() {
   }, [context.uid]);
 
   return (
-    <div className={classes.box}>
-      {likeData.map((element) => (
-        <MovieCard key={element.id} element={element} />
-      ))}
-    </div>
+    <>
+      <h2 className={classes.heading}>Your Whishlist</h2>
+      <div className={classes.box}>
+        {likeData.map((element) => (
+          <MovieCard key={element.id} element={element} />
+        ))}
+      </div>
+    </>
   );
 }
 export default LikedItems;

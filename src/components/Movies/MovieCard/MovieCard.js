@@ -45,7 +45,7 @@ const MovieCard = (props) => {
   }
 
   return (
-    <Card>
+    <Card class={classes["card-bg"]}>
       <div
         className={classes.image}
         onMouseOver={() => setHover(true)}
