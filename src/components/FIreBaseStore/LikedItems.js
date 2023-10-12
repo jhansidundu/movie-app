@@ -6,17 +6,23 @@ import { db } from "../../config/firebase";
 import { AUTHTOKEN } from "../../constants";
 import MovieCard from "../Movies/MovieCard/MovieCard";
 import classes from "./LikedItems.module.css";
+import { PROXY_URL } from "../../constants";
 
 function LikedItems() {
   const [likeData, setLiked] = useState([]);
   const context = useContext(userContext);
+
+  function removeItem(item) {
+    const movieId = likeData.findIndex((m) => (m.id = item.id));
+    const movies = likeData.splice(movieId, 1);
+    setLiked(movies);
+  }
 
   useEffect(() => {
     let filterData = [];
     const getList = async () => {
       const movieCollection = collection(db, "wishlist-movies");
       try {
-        const movieCollection = collection(db, "wishlist-movies");
         const q = query(movieCollection, where("uid", "==", context.uid));
         const querySnapshot = await getDocs(q);
 
@@ -26,9 +32,10 @@ function LikedItems() {
       }
       for (let record of filterData) {
         const response = axios.get(
-          `https://api.themoviedb.org/3/movie/${record.movieId}?language=en-US`,
+          `${PROXY_URL}/movie/${record.movieId}?language=en-US`,
           {
             headers: {
+              // "Access-Control-Allow-Origin": "*",
               Authorization: AUTHTOKEN,
             },
           }
@@ -46,15 +53,28 @@ function LikedItems() {
     getList();
   }, [context.uid]);
 
+  if (!likeData || likeData.length === 0) {
+    return (
+      <div className={classes.content}>
+        <h5 className="px-4 pt-2">There are no movies whishlisted.</h5>
+      </div>
+    );
+  }
+
   return (
-    <>
+    <div className={classes.content}>
       <h4 className={classes.heading}>Your Whishlist</h4>
       <div className={classes.box}>
         {likeData.map((element) => (
-          <MovieCard key={element.id} element={element} />
+          <MovieCard
+            key={element.id}
+            element={element}
+            isLiked={true}
+            onDisLike={removeItem}
+          />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 export default LikedItems;

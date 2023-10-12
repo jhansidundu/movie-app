@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import userContext from "../../Store/context";
 import { auth } from "../../config/firebase";
-import Card from "../UI/Card/Card";
 import classes from "./SignIn.module.css";
 
 function SignIn() {
@@ -46,7 +45,7 @@ function SignIn() {
             <input type="password" className="form-control" id="password" />
           </div>
           {errorMessage && (
-            <div className={`${classes.error} mb-2`}>{errorMessage}</div>
+            <div className={`text-danger mb-2`}>{errorMessage}</div>
           )}
 
           <button type="submit" className="btn btn-info">

@@ -1,61 +1,82 @@
-import classes from "./MovieCard.module.css";
-import Card from "../../UI/Card/Card";
-import image from "../../../assets/No_Image_Available.jpg";
-import { useState } from "react";
-import { collection, addDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../../../config/firebase";
-import userContext from "../../../Store/context";
-import { useContext } from "react";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { useContext, useState } from "react";
+import { AiFillHeart } from "react-icons/ai";
 import { BiHeart } from "react-icons/bi";
 import { useNavigate } from "react-router";
+import userContext from "../../../Store/context";
+import image from "../../../assets/No_Image_Available.jpg";
+import { db } from "../../../config/firebase";
+import Card from "../../UI/Card/Card";
+import classes from "./MovieCard.module.css";
 
-const MovieCard = (props) => {
+const MovieCard = ({ element, isLiked = false, onDisLike = null }) => {
   const context = useContext(userContext);
   const [isHovered, setHover] = useState(false);
-  const [color, setColor] = useState("white-color");
+  const [liked, setLiked] = useState(isLiked);
   const navigate = useNavigate();
 
-  const url = props.element.backdrop_path
-    ? `https://image.tmdb.org/t/p/w220_and_h330_face${props.element.backdrop_path}`
+  const url = element.backdrop_path
+    ? `https://image.tmdb.org/t/p/w220_and_h330_face${element.backdrop_path}`
     : image;
   const movieCollection = collection(db, "wishlist-movies");
   const goToMovieDetails = () => {
-    navigate(`/movie/${props.element.id}`);
+    navigate(`/movie/${element.id}`);
   };
-  const onAddLike = async () => {
-    if (color === "white-color") {
+  const onAddLike = async (e) => {
+    console.log(e);
+    e.stopPropagation();
+    if (!liked) {
       await addDoc(movieCollection, {
-        movieId: props.element.id,
+        movieId: element.id,
         uid: context.uid,
       });
-      setColor("red-color");
+      setLiked(true);
     } else {
-      await deleteDoc(movieCollection, {
-        movieId: props.element.id,
-        uid: context.uid,
+      const q = query(
+        movieCollection,
+        where("uid", "==", context.uid),
+        where("movieId", "==", element.id)
+      );
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.docs.forEach((d) => {
+        const docRef = doc(movieCollection, d.id);
+
+        deleteDoc(docRef)
+          .then(() => {
+            setLiked(false);
+            if (onDisLike) {
+              onDisLike(element);
+            }
+          })
+          .catch((error) => {
+            console.error("Error deleting document: ", error);
+          });
       });
-      setColor("white-color");
     }
   };
 
   let likeButton;
   if (context.login) {
     likeButton = (
-      <div onClick={onAddLike} className={`${classes[color]} ${classes.heart}`}>
-        <BiHeart></BiHeart>
+      <div
+        onClick={onAddLike}
+        className={`${classes.heart} ${liked ? "text-danger" : ""}`}
+      >
+        {liked ? <AiFillHeart /> : <BiHeart />}
       </div>
     );
   } else {
     likeButton = <div></div>;
   }
-  let date = props.element.release_date;
-  console.log(date);
-  const dateArr = date.split("-");
-  console.log(dateArr);
-  const newDate = dateArr.map((ele) => {
-    return parseInt(ele);
-  });
-  console.log(newDate);
 
   function getDisplayTitle(title) {
     if (title.length < 25) return title;
@@ -74,10 +95,10 @@ const MovieCard = (props) => {
         </div>
         <div className={classes["card-body"]}>
           <div className="d-flex justify-content-between">
-            <p className="m-0">{getDisplayTitle(props.element.title)}</p>
+            <p className="m-0 pr-2">{getDisplayTitle(element.title)}</p>
             <span>
               <p className="d-inline text-warning">
-                {props.element.vote_average}
+                {Math.round(element.vote_average * 10) / 10}
               </p>
               /10
             </span>

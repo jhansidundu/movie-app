@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { AUTHTOKEN } from "../../../constants";
+import { AUTHTOKEN, PROXY_URL } from "../../../constants";
 import MovieCard from "../MovieCard/MovieCard";
 import classes from "./SearchMov.module.css";
 import { useSearchParams } from "react-router-dom";
@@ -10,14 +10,12 @@ const SearchMovies = () => {
   useEffect(() => {
     const query = searchParams.get("q");
     const result = [];
-    const url =
-      "https://api.themoviedb.org/3/search/movie?query=" +
-      query +
-      "&include_adult=false&language=en-US&page=1";
+    const url = `${PROXY_URL}/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
     console.log(url);
     const response = axios.get(url, {
       headers: {
         authorization: AUTHTOKEN,
+        // "Access-Control-Allow-Origin": "*",
       },
     });
 
@@ -40,15 +38,13 @@ const SearchMovies = () => {
 
   return (
     <div className={`${classes.content} text-light`}>
-      <h4 className={`${classes["px-2"]} ${classes["pt-1"]}`}>
-        Searched Movies
-      </h4>
+      <h4 className="px-3 pt-2">Searched Movies</h4>
 
-      <ul className={classes.box}>
+      <div className={classes.box}>
         {searchResult.map((element) => (
           <MovieCard key={element.id} element={element} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
