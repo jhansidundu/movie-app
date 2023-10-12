@@ -57,10 +57,12 @@ const MovieCard = (props) => {
   });
   console.log(newDate);
 
-  // var date8 = new Date(newDate[0], newDate[1], newDate[2]);
-  // console.log(date8);
+  function getDisplayTitle(title) {
+    if (title.length < 25) return title;
+    else return title.substring(0, 25);
+  }
   return (
-    <Card class={classes["card-bg"]}>
+    <Card class={classes["card"]}>
       <div onClick={goToMovieDetails}>
         <div
           className={classes.image}
@@ -70,7 +72,17 @@ const MovieCard = (props) => {
           <img className={classes.pic} src={url} />
           {isHovered && likeButton}
         </div>
-        <div className={classes["card-body"]}>{props.element.title}</div>
+        <div className={classes["card-body"]}>
+          <div className="d-flex justify-content-between">
+            <p className="m-0">{getDisplayTitle(props.element.title)}</p>
+            <span>
+              <p className="d-inline text-warning">
+                {props.element.vote_average}
+              </p>
+              /10
+            </span>
+          </div>
+        </div>
       </div>
     </Card>
   );
