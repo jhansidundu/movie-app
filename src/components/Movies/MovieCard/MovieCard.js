@@ -48,7 +48,17 @@ const MovieCard = (props) => {
   } else {
     likeButton = <div></div>;
   }
+  let date = props.element.release_date;
+  console.log(date);
+  const dateArr = date.split("-");
+  console.log(dateArr);
+  const newDate = dateArr.map((ele) => {
+    return parseInt(ele);
+  });
+  console.log(newDate);
 
+  // var date8 = new Date(newDate[0], newDate[1], newDate[2]);
+  // console.log(date8);
   return (
     <Card class={classes["card-bg"]}>
       <div onClick={goToMovieDetails}>

@@ -13,7 +13,7 @@
   position: absolute;
   cursor: pointer;
   right: 8px;
-  bottom: 8px;
+  top: 0px;
   z-index: 1;
   font-size: 1.5rem;
 }
@@ -35,5 +35,5 @@
 
 .card-body {
   padding: 1rem;
-  color: white;
+  color: rgb(15, 13, 13);
 }

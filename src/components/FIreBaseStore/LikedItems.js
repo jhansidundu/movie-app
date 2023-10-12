@@ -10,9 +10,11 @@ import classes from "./LikedItems.module.css";
 function LikedItems() {
   const [likeData, setLiked] = useState([]);
   const context = useContext(userContext);
+
   useEffect(() => {
     let filterData = [];
     const getList = async () => {
+      const movieCollection = collection(db, "wishlist-movies");
       try {
         const movieCollection = collection(db, "wishlist-movies");
         const q = query(movieCollection, where("uid", "==", context.uid));
