@@ -13,43 +13,41 @@ function LikedItems() {
   const context = useContext(userContext);
 
   function removeItem(item) {
-    const movieId = likeData.findIndex((m) => (m.id = item.id));
-    const movies = likeData.splice(movieId, 1);
-    setLiked(movies);
+    getList();
   }
 
-  useEffect(() => {
+  const getList = async () => {
     let filterData = [];
-    const getList = async () => {
-      const movieCollection = collection(db, "wishlist-movies");
-      try {
-        const q = query(movieCollection, where("uid", "==", context.uid));
-        const querySnapshot = await getDocs(q);
+    setLiked([]);
+    const movieCollection = collection(db, "wishlist-movies");
+    try {
+      const q = query(movieCollection, where("uid", "==", context.uid));
+      const querySnapshot = await getDocs(q);
 
-        filterData = querySnapshot.docs.map((doc) => doc.data());
-      } catch (err) {
-        console.log(err);
-      }
-      for (let record of filterData) {
-        const response = axios.get(
-          `${PROXY_URL}/movie/${record.movieId}?language=en-US`,
-          {
-            headers: {
-              // "Access-Control-Allow-Origin": "*",
-              Authorization: AUTHTOKEN,
-            },
-          }
-        );
+      filterData = querySnapshot.docs.map((doc) => doc.data());
+    } catch (err) {
+      console.log(err);
+    }
+    for (let record of filterData) {
+      const response = axios.get(
+        `${PROXY_URL}/movie/${record.movieId}?language=en-US`,
+        {
+          headers: {
+            // "Access-Control-Allow-Origin": "*",
+            Authorization: AUTHTOKEN,
+          },
+        }
+      );
 
-        response.then((res) => {
-          res = res.data;
-          setLiked((prev) => {
-            return [...prev, res];
-          });
+      response.then((res) => {
+        res = res.data;
+        setLiked((prev) => {
+          return [...prev, res];
         });
-      }
-    };
-
+      });
+    }
+  };
+  useEffect(() => {
     getList();
   }, [context.uid]);
 
