@@ -30,7 +30,7 @@ const MovieCard = ({ element, isLiked = false, onDisLike = null }) => {
   const goToMovieDetails = () => {
     navigate(`/movie/${element.id}`);
   };
-  const onAddLike = async (e) => {
+  async function onAddLike(e) {
     console.log(e);
     e.stopPropagation();
     if (!liked) {
@@ -62,8 +62,11 @@ const MovieCard = ({ element, isLiked = false, onDisLike = null }) => {
           });
       });
     }
-  };
-
+  }
+  function getDisplayTitle(title) {
+    if (title.length < 25) return title;
+    else return title.substring(0, 25);
+  }
   let likeButton;
   if (context.login) {
     likeButton = (
@@ -78,10 +81,6 @@ const MovieCard = ({ element, isLiked = false, onDisLike = null }) => {
     likeButton = <div></div>;
   }
 
-  function getDisplayTitle(title) {
-    if (title.length < 25) return title;
-    else return title.substring(0, 25);
-  }
   return (
     <Card class={classes["card"]}>
       <div onClick={goToMovieDetails}>
@@ -90,7 +89,7 @@ const MovieCard = ({ element, isLiked = false, onDisLike = null }) => {
           onMouseOver={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <img className={classes.pic} src={url} />
+          <img className={classes.pic} src={url} alt="movie" />
           {isHovered && likeButton}
         </div>
         <div className={classes["card-body"]}>

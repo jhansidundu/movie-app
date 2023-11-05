@@ -1,10 +1,9 @@
 import { useContext, useRef } from "react";
+import { BiSearchAlt } from "react-icons/bi";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import userContext from "../../Store/context";
-import image from "../../assets/Tmdb.svg";
 import classes from "./Header.module.css";
-import { BiSearchAlt } from "react-icons/bi";
 const Header = () => {
   const searchRef = useRef(null);
   const navigate = useNavigate();
@@ -36,7 +35,8 @@ const Header = () => {
     <>
       <header className={classes.header}>
         <Link className={classes.logo} to="/home">
-          <img src={image} />
+          {/* <img src={image} /> */}
+          <h3>Movie Explorer</h3>
         </Link>
 
         <div className={classes.searchParent}>

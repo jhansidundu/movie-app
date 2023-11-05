@@ -35,15 +35,25 @@ function SignUp() {
         <form onSubmit={onSubmitHandler}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
-              Username
+              Email
             </label>
-            <input type="email" className="form-control" id="email" />
+            <input
+              type="email"
+              placeholder="enter email address"
+              className="form-control"
+              id="email"
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
               Password
             </label>
-            <input type="password" className="form-control" id="password" />
+            <input
+              type="password"
+              placeholder="enter password"
+              className="form-control"
+              id="password"
+            />
           </div>
           {errorMessage && (
             <div className="text-danger mb-2">{errorMessage}</div>

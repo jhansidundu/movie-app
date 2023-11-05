@@ -1,8 +1,12 @@
 .logo {
   display: block;
   margin-right: 16px;
-  width: 154px;
-  height: 20px;
+  text-decoration: none;
+}
+
+.logo h3 {
+  margin: 0;
+  padding: 0;
 }
 
 .header {
